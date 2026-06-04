@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FTD Launch | West Coast Wildfire Mitigation Guide 2026</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ftd-orange: #F97316;
+    --ftd-dark: #0f172a;
+    --ftd-navy: #1e293b;
+    --ftd-slate: #334155;
+    --ftd-muted: #64748b;
+    --ftd-light: #f8fafc;
+    --ftd-white: #ffffff;
+    --ftd-amber: #F59E0B;
+    --ftd-red: #EF4444;
+    --ftd-green: #22C55E;
+    --ftd-teal: #14B8A6;
+    --accent-gradient: linear-gradient(135deg, #F97316 0%, #F59E0B 100%);
+    --section-max: 1100px;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', system-ui, sans-serif;
+    background: var(--ftd-light);
+    color: var(--ftd-dark);
+    line-height: 1.7;
+    font-size: 16px;
+  }
+
+  /* ── PAGE PRINT SUPPORT ── */
+  @media print {
+    .sidebar-nav, .back-to-top { display: none !important; }
+    .chapter-hero { page-break-after: always; }
+    section { page-break-inside: avoid; }
+  }
+
+  /* ── TYPOGRAPHY ── */
+  h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; line-height: 1.2; }
+  h1 { font-size: clamp(2.5rem, 6vw, 5rem); font-weight: 900; }
+  h2 { font-size: clamp(1.8rem, 3.5vw, 2.8rem); font-weight: 700; }
+  h3 { font-size: clamp(1.3rem, 2.5vw, 1.8rem); font-weight: 700; }
+  h4 { font-size: 1.1rem; font-weight: 700; font-family: 'Inter', sans-serif; letter-spacing: 0.02em; }
+  p { margin-bottom: 1rem; color: var(--ftd-slate); }
+  strong { color: var(--ftd-dark); font-weight: 600; }
+
+  /* ── LAYOUT ── */
+  .container { max-width: var(--section-max); margin: 0 auto; padding: 0 clamp(1.5rem, 4vw, 3rem); }
+  .section-pad { padding: clamp(3rem, 8vw, 6rem) 0; }
+
+  /* ── COVER PAGE ── */
+  .cover {
+    min-height: 100vh;
+    background: linear-gradient(160deg, #0f172a 0%, #1e293b 40%, #0c1a2e 100%);
+    display: flex; flex-direction: column;
+    position: relative; overflow: hidden;
+    color: white;
+  }
+  .cover-mesh {
+    position: absolute; inset: 0; pointer-events: none;
+  }
+  .cover-blob {
+    position: absolute; border-radius: 50%; filter: blur(100px); opacity: 0.18;
+  }
+  .cover-content {
+    position: relative; z-index: 2;
+    flex: 1; display: flex; flex-direction: column; justify-content: center;
+    padding: clamp(3rem, 8vw, 6rem) clamp(2rem, 6vw, 5rem);
+    max-width: 900px;
+  }
+  .ftd-badge {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: rgba(249,115,22,0.15); border: 1px solid rgba(249,115,22,0.4);
+    color: #F97316; padding: 0.4rem 1rem; border-radius: 2rem;
+    font-size: 0.8rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+    margin-bottom: 1.5rem; width: fit-content;
+  }
+  .cover h1 {
+    color: white;
+    background: linear-gradient(135deg, #ffffff 0%, #F59E0B 60%, #F97316 100%);
+    -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1.5rem;
+  }
+  .cover-sub {
+    font-size: clamp(1rem, 2vw, 1.25rem); color: rgba(255,255,255,0.7);
+    letter-spacing: 0.04em; margin-bottom: 2.5rem;
+    font-weight: 300; max-width: 620px;
+  }
+  .cover-meta {
+    display: flex; gap: 2rem; flex-wrap: wrap;
+    border-top: 1px solid rgba(255,255,255,0.1); padding-top: 2rem; margin-top: 1rem;
+  }
+  .cover-meta-item { display: flex; flex-direction: column; gap: 0.2rem; }
+  .cover-meta-label { font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.12em; color: rgba(255,255,255,0.4); }
+  .cover-meta-value { font-size: 0.95rem; color: rgba(255,255,255,0.85); font-weight: 500; }
+  .cover-visual {
+    position: absolute; right: -60px; top: 50%; transform: translateY(-50%);
+    width: min(600px, 55vw); opacity: 0.06;
+    pointer-events: none;
+  }
+
+  /* ── NAV ── */
+  .sidebar-nav {
+    position: fixed; top: 0; left: 0; width: 260px; height: 100vh;
+    background: var(--ftd-dark); color: white; z-index: 50;
+    transform: translateX(-100%); transition: transform 0.3s ease;
+    overflow-y: auto; padding: 2rem 1.5rem;
+    display: flex; flex-direction: column; gap: 0.4rem;
+  }
+  .sidebar-nav.open { transform: translateX(0); }
+  .sidebar-nav a {
+    display: block; padding: 0.5rem 0.75rem; color: rgba(255,255,255,0.65);
+    text-decoration: none; font-size: 0.82rem; font-weight: 500; border-radius: 6px;
+    transition: all 0.2s;
+  }
+  .sidebar-nav a:hover, .sidebar-nav a.active { color: white; background: rgba(249,115,22,0.15); }
+  .sidebar-nav .nav-section { font-size: 0.68rem; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ftd-orange); margin: 1rem 0 0.3rem; font-weight: 700; padding-left: 0.75rem; }
+  .hamburger {
+    position: fixed; top: 1.2rem; left: 1.2rem; z-index: 60;
+    width: 40px; height: 40px; background: var(--ftd-orange); border: none;
+    border-radius: 8px; cursor: pointer; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; gap: 5px;
+  }
+  .hamburger span { width: 18px; height: 2px; background: white; border-radius: 2px; }
+  .overlay {
+    position: fixed; inset: 0; background: rgba(0,0,0,0.5); z-index: 45;
+    opacity: 0; pointer-events: none; transition: opacity 0.3s;
+  }
+  .overlay.show { opacity: 1; pointer-events: all; }
+
+  /* ── CHAPTER HERO ── */
+  .chapter-hero {
+    background: var(--ftd-dark);
+    color: white;
+    padding: clamp(3rem, 7vw, 5rem) clamp(2rem, 6vw, 5rem);
+    border-left: 6px solid var(--ftd-orange);
+    position: relative; overflow: hidden;
+    margin: 3rem 0 0;
+  }
+  .chapter-num {
+    font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em;
+    color: var(--ftd-orange); margin-bottom: 0.75rem;
+  }
+  .chapter-hero h2 { color: white; margin-bottom: 0.75rem; }
+  .chapter-hero p { color: rgba(255,255,255,0.65); max-width: 680px; margin: 0; }
+  .chapter-deco {
+    position: absolute; right: -20px; top: -20px;
+    width: 200px; height: 200px; border-radius: 50%;
+    background: var(--ftd-orange); opacity: 0.05; filter: blur(40px);
+  }
+
+  /* ── TABLE OF CONTENTS ── */
+  .toc {
+    background: white; border: 1px solid #e2e8f0;
+    border-radius: 12px; padding: 2.5rem; margin: 3rem 0;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+  }
+  .toc-title { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ftd-orange); margin-bottom: 1.5rem; }
+  .toc-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 0.5rem; }
+  .toc-item {
+    display: flex; align-items: flex-start; gap: 0.75rem; padding: 0.75rem 0.5rem;
+    border-bottom: 1px solid #f1f5f9; cursor: pointer;
+    text-decoration: none; color: var(--ftd-slate); transition: all 0.2s;
+    border-radius: 6px;
+  }
+  .toc-item:hover { background: #fff7ed; color: var(--ftd-orange); }
+  .toc-num { font-size: 0.75rem; font-weight: 700; color: var(--ftd-orange); min-width: 1.5rem; margin-top: 0.1rem; }
+  .toc-text { font-size: 0.88rem; font-weight: 500; line-height: 1.4; }
+
+  /* ── STAT CARDS ── */
+  .stat-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .stat-card {
+    background: white; border-radius: 12px; padding: 1.5rem;
+    border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border-top: 3px solid var(--ftd-orange);
+  }
+  .stat-num { font-size: 2rem; font-weight: 900; color: var(--ftd-dark); font-family: 'Playfair Display', serif; line-height: 1; }
+  .stat-label { font-size: 0.78rem; font-weight: 600; color: var(--ftd-muted); text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.4rem; }
+  .stat-context { font-size: 0.8rem; color: var(--ftd-muted); margin-top: 0.5rem; }
+
+  .stat-card.blue { border-top-color: #3B82F6; }
+  .stat-card.green { border-top-color: var(--ftd-green); }
+  .stat-card.red { border-top-color: var(--ftd-red); }
+  .stat-card.teal { border-top-color: var(--ftd-teal); }
+
+  /* ── CALLOUT BOXES ── */
+  .callout {
+    border-radius: 10px; padding: 1.5rem 1.75rem; margin: 1.5rem 0;
+    border-left: 4px solid var(--ftd-orange);
+    background: #fff7ed;
+  }
+  .callout.blue { border-left-color: #3B82F6; background: #eff6ff; }
+  .callout.green { border-left-color: var(--ftd-green); background: #f0fdf4; }
+  .callout.red { border-left-color: var(--ftd-red); background: #fef2f2; }
+  .callout.dark { border-left-color: var(--ftd-orange); background: var(--ftd-dark); color: white; }
+  .callout.dark p { color: rgba(255,255,255,0.8); }
+  .callout-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: var(--ftd-orange); margin-bottom: 0.4rem; }
+  .callout.blue .callout-label { color: #3B82F6; }
+  .callout.green .callout-label { color: var(--ftd-green); }
+  .callout.red .callout-label { color: var(--ftd-red); }
+  .callout.dark .callout-label { color: var(--ftd-orange); }
+  .callout h4 { margin-bottom: 0.5rem; color: var(--ftd-dark); }
+  .callout.dark h4 { color: white; }
+
+  /* ── TABLES ── */
+  .table-wrap { overflow-x: auto; margin: 1.5rem 0; border-radius: 10px; box-shadow: 0 2px 8px rgba(0,0,0,0.07); }
+  table { width: 100%; border-collapse: collapse; background: white; font-size: 0.88rem; }
+  thead tr { background: var(--ftd-dark); color: white; }
+  thead th { padding: 0.85rem 1.1rem; text-align: left; font-weight: 600; font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.06em; }
+  tbody tr { border-bottom: 1px solid #f1f5f9; }
+  tbody tr:nth-child(even) { background: #fafafa; }
+  tbody td { padding: 0.8rem 1.1rem; color: var(--ftd-slate); vertical-align: top; }
+  .tag {
+    display: inline-block; padding: 0.2rem 0.55rem; border-radius: 20px;
+    font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.06em;
+  }
+  .tag-p1 { background: #fee2e2; color: #dc2626; }
+  .tag-p2 { background: #fef3c7; color: #d97706; }
+  .tag-p3 { background: #dcfce7; color: #16a34a; }
+  .tag-high { background: #fee2e2; color: #dc2626; }
+  .tag-med { background: #fef3c7; color: #d97706; }
+  .tag-low { background: #dcfce7; color: #16a34a; }
+
+  /* ── PROCESS STEPS ── */
+  .steps { display: flex; flex-direction: column; gap: 0; margin: 1.5rem 0; }
+  .step { display: flex; gap: 1.5rem; padding: 1.5rem 0; border-bottom: 1px solid #f1f5f9; }
+  .step:last-child { border-bottom: none; }
+  .step-num {
+    min-width: 48px; height: 48px; border-radius: 50%;
+    background: var(--accent-gradient); color: white;
+    display: flex; align-items: center; justify-content: center;
+    font-weight: 900; font-size: 1.1rem; flex-shrink: 0;
+    box-shadow: 0 4px 12px rgba(249,115,22,0.3);
+  }
+  .step-body h4 { margin-bottom: 0.4rem; }
+  .step-body p { margin: 0; font-size: 0.9rem; }
+
+  /* ── RISK MATRIX ── */
+  .risk-matrix { display: grid; grid-template-columns: repeat(5, 1fr); gap: 3px; margin: 1.5rem 0; border-radius: 10px; overflow: hidden; }
+  .risk-cell {
+    padding: 0.7rem 0.5rem; text-align: center; font-size: 0.72rem; font-weight: 700;
+    border-radius: 3px;
+  }
+  .risk-cell.header { background: var(--ftd-dark); color: white; font-size: 0.7rem; }
+  .risk-cell.low { background: #dcfce7; color: #166534; }
+  .risk-cell.moderate { background: #fef9c3; color: #854d0e; }
+  .risk-cell.elevated { background: #ffedd5; color: #c2410c; }
+  .risk-cell.high { background: #fee2e2; color: #991b1b; }
+  .risk-cell.critical { background: #7f1d1d; color: white; }
+
+  /* ── CARDS GRID ── */
+  .cards-2 { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 1.5rem; margin: 2rem 0; }
+  .cards-3 { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 1.25rem; margin: 2rem 0; }
+  .card {
+    background: white; border-radius: 12px; padding: 1.75rem;
+    border: 1px solid #e2e8f0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    transition: transform 0.2s, box-shadow 0.2s;
+  }
+  .card:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.1); }
+  .card-icon { font-size: 2rem; margin-bottom: 0.75rem; }
+  .card h4 { margin-bottom: 0.5rem; color: var(--ftd-dark); }
+  .card p { font-size: 0.88rem; margin: 0; }
+  .card.dark-card { background: var(--ftd-dark); color: white; border-color: rgba(255,255,255,0.08); }
+  .card.dark-card h4 { color: white; }
+  .card.dark-card p { color: rgba(255,255,255,0.65); }
+  .card.accent-border { border-top: 3px solid var(--ftd-orange); }
+  .card.accent-border.blue { border-top-color: #3B82F6; }
+  .card.accent-border.green { border-top-color: var(--ftd-green); }
+
+  /* ── TIER MAP VISUAL ── */
+  .tier-bar {
+    display: flex; border-radius: 8px; overflow: hidden;
+    height: 48px; margin: 1rem 0; font-size: 0.78rem; font-weight: 700;
+  }
+  .tier-segment {
+    display: flex; align-items: center; justify-content: center; padding: 0 0.75rem;
+    flex-shrink: 0;
+  }
+  .tier-seg-1 { background: #fef9c3; color: #854d0e; flex: 2; }
+  .tier-seg-2 { background: #fed7aa; color: #9a3412; flex: 3; }
+  .tier-seg-3 { background: #fca5a5; color: #7f1d1d; flex: 2; }
+  .tier-seg-hfra { background: #7f1d1d; color: white; flex: 1; }
+
+  /* ── HORIZONTAL BAR CHART ── */
+  .hbar-chart { display: flex; flex-direction: column; gap: 0.75rem; margin: 1.5rem 0; }
+  .hbar-row { display: flex; align-items: center; gap: 0.75rem; }
+  .hbar-label { min-width: 140px; font-size: 0.82rem; font-weight: 500; color: var(--ftd-slate); text-align: right; }
+  .hbar-track { flex: 1; background: #f1f5f9; border-radius: 4px; height: 28px; overflow: hidden; }
+  .hbar-fill { height: 100%; border-radius: 4px; display: flex; align-items: center; padding-left: 0.75rem; font-size: 0.75rem; font-weight: 700; color: white; transition: width 1s ease; }
+  .hbar-value { min-width: 60px; font-size: 0.82rem; font-weight: 700; color: var(--ftd-dark); }
+
+  /* ── TIMELINE ── */
+  .timeline { position: relative; padding-left: 2.5rem; }
+  .timeline::before { content: ''; position: absolute; left: 0.7rem; top: 0; bottom: 0; width: 2px; background: linear-gradient(to bottom, var(--ftd-orange), var(--ftd-amber)); }
+  .timeline-item { position: relative; margin-bottom: 2rem; }
+  .timeline-dot {
+    position: absolute; left: -2.5rem; top: 0.2rem;
+    width: 16px; height: 16px; border-radius: 50%;
+    background: var(--ftd-orange); box-shadow: 0 0 0 4px #fff7ed;
+    border: 2px solid var(--ftd-orange);
+  }
+  .timeline-date { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ftd-orange); margin-bottom: 0.3rem; }
+  .timeline-title { font-size: 0.95rem; font-weight: 700; color: var(--ftd-dark); margin-bottom: 0.3rem; }
+  .timeline-body { font-size: 0.85rem; color: var(--ftd-muted); }
+
+  /* ── SCORE DISPLAY ── */
+  .score-band { display: flex; gap: 1rem; flex-wrap: wrap; margin: 1.5rem 0; }
+  .score-item { flex: 1; min-width: 100px; background: white; border-radius: 10px; padding: 1rem; text-align: center; border: 1px solid #e2e8f0; }
+  .score-range { font-size: 1.1rem; font-weight: 900; font-family: 'Playfair Display', serif; }
+  .score-label { font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.08em; margin-top: 0.2rem; }
+  .score-action { font-size: 0.72rem; color: var(--ftd-muted); margin-top: 0.3rem; }
+  .score-low { background: #f0fdf4; border-color: #bbf7d0; }
+  .score-low .score-range { color: #15803d; }
+  .score-mod { background: #fffbeb; border-color: #fde68a; }
+  .score-mod .score-range { color: #d97706; }
+  .score-elev { background: #fff7ed; border-color: #fed7aa; }
+  .score-elev .score-range { color: #c2410c; }
+  .score-high { background: #fef2f2; border-color: #fecaca; }
+  .score-high .score-range { color: #dc2626; }
+  .score-sev { background: #fef2f2; border-color: #f87171; }
+  .score-sev .score-range { color: #991b1b; }
+  .score-crit { background: #7f1d1d; border-color: #7f1d1d; }
+  .score-crit .score-range { color: white; }
+  .score-crit .score-label { color: rgba(255,255,255,0.7); }
+  .score-crit .score-action { color: rgba(255,255,255,0.6); }
+
+  /* ── DIVIDER ── */
+  .chapter-divider { height: 4px; background: var(--accent-gradient); margin: 0; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: var(--ftd-dark); color: rgba(255,255,255,0.55);
+    padding: 2.5rem; text-align: center; font-size: 0.82rem;
+    border-top: 3px solid var(--ftd-orange);
+  }
+  footer strong { color: rgba(255,255,255,0.85); }
+
+  /* ── BACK TO TOP ── */
+  .back-to-top {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 40;
+    width: 44px; height: 44px; border-radius: 50%;
+    background: var(--ftd-orange); color: white; border: none;
+    font-size: 1.2rem; cursor: pointer; box-shadow: 0 4px 12px rgba(249,115,22,0.4);
+    display: flex; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+  }
+  .back-to-top:hover { transform: translateY(-3px); }
+
+  /* ── SECTION LABELS ── */
+  .section-label { font-size: 0.72rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.15em; color: var(--ftd-orange); margin-bottom: 0.5rem; }
+  .lead { font-size: 1.1rem; color: var(--ftd-slate); line-height: 1.8; margin-bottom: 1.5rem; }
+
+  /* ── IMAGE PLACEHOLDER / DIAGRAMS ── */
+  .diagram-box {
+    background: white; border: 1px solid #e2e8f0; border-radius: 12px;
+    padding: 2rem; margin: 1.5rem 0; box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+  }
+  .diagram-title { font-size: 0.78rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.1em; color: var(--ftd-muted); margin-bottom: 1rem; padding-bottom: 0.75rem; border-bottom: 1px solid #f1f5f9; }
+  .diagram-svg-wrap { display: flex; justify-content: center; align-items: center; min-height: 180px; }
+
+  /* ── FORMULA ── */
+  .formula-box {
+    background: var(--ftd-dark); color: white; border-radius: 10px;
+    padding: 1.5rem 2rem; margin: 1.5rem 0; text-align: center;
+    font-family: 'Inter', monospace; font-size: 1.1rem;
+    letter-spacing: 0.03em;
+  }
+  .formula-box span { color: var(--ftd-orange); font-weight: 700; }
+
+  /* ── CHECKLIST ── */
+  .checklist { list-style: none; display: flex; flex-direction: column; gap: 0.5rem; margin: 1rem 0; }
+  .checklist li {
+    display: flex; align-items: flex-start; gap: 0.75rem;
+    font-size: 0.88rem; color: var(--ftd-slate); padding: 0.6rem 0.75rem;
+    background: white; border-radius: 6px; border: 1px solid #f1f5f9;
+  }
+  .checklist li::before { content: '☑'; color: var(--ftd-green); font-size: 1rem; flex-shrink: 0; margin-top: 0.05rem; }
+
+  /* ── UTILITY LOGO ROW ── */
+  .utility-row { display: flex; gap: 1.5rem; flex-wrap: wrap; align-items: center; margin: 1.5rem 0; }
+  .utility-badge {
+    background: white; border: 1px solid #e2e8f0; border-radius: 8px;
+    padding: 0.6rem 1.25rem; font-size: 0.8rem; font-weight: 700;
+    color: var(--ftd-slate); display: flex; align-items: center; gap: 0.5rem;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .utility-dot { width: 8px; height: 8px; border-radius: 50%; }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 600px) {
+    .cards-2, .cards-3 { grid-template-columns: 1fr; }
+    .stat-grid { grid-template-columns: repeat(2, 1fr); }
+    .tier-bar { flex-direction: column; height: auto; }
+    .tier-segment { padding: 0.6rem; }
+    .hbar-label { min-width: 90px; font-size: 0.75rem; }
+  }
+</style>
+</head>
+<body id="top">
+
+<!-- HAMBURGER MENU BUTTON -->
+<button class="hamburger" onclick="toggleNav()" aria-label="Open navigation">
+  <span></span><span></span><span></span>
+</button>
+
+<!-- OVERLAY -->
+<div class="overlay" id="overlay" onclick="toggleNav()"></div>
+
+<!-- SIDEBAR NAV -->
+<nav class="sidebar-nav" id="sidebarNav">
+  <div style="padding-bottom:1rem;border-bottom:1px solid rgba(255,255,255,0.1);margin-bottom:0.5rem;">
+    <div style="font-weight:900;font-size:1.1rem;color:#F97316;font-family:'Playfair Display',serif;">FTD Launch</div>
+    <div style="font-size:0.7rem;color:rgba(255,255,255,0.4);margin-top:0.2rem;">Wildfire Mitigation Guide 2026</div>
+  </div>
+  <div class="nav-section">Overview</div>
+  <a href="#cover">Cover</a>
+  <a href="#toc">Table of Contents</a>
+  <a href="#executive-summary">Executive Summary</a>
+  <div class="nav-section">Threat Landscape</div>
+  <a href="#ch1">01 – West Coast Fire Risk</a>
+  <a href="#ch2">02 – Regulatory Framework</a>
+  <div class="nav-section">Mitigation Pillars</div>
+  <a href="#ch3">03 – Risk Scoring System</a>
+  <a href="#ch4">04 – Drone & LiDAR Ops</a>
+  <a href="#ch5">05 – Vegetation Management</a>
+  <a href="#ch6">06 – System Hardening</a>
+  <div class="nav-section">Operations</div>
+  <a href="#ch7">07 – Fire Weather Operations</a>
+  <a href="#ch8">08 – Developing a WMP</a>
+  <a href="#ch9">09 – Technology & Data</a>
+  <a href="#ch10">10 – Communications</a>
+  <div class="nav-section">Reference</div>
+  <a href="#appendix-a">Appendix A – Scoring Tables</a>
+  <a href="#appendix-b">Appendix B – Checklist</a>
+</nav>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- COVER -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="cover" id="cover">
+  <div class="cover-mesh">
+    <div class="cover-blob" style="width:700px;height:700px;top:-200px;right:-200px;background:#F97316;"></div>
+    <div class="cover-blob" style="width:400px;height:400px;bottom:-100px;left:-100px;background:#F59E0B;"></div>
+    <div class="cover-blob" style="width:300px;height:300px;top:40%;left:30%;background:#3B82F6;opacity:0.1;"></div>
+  </div>
+
+  <!-- Large hex grid decorative background -->
+  <svg class="cover-visual" viewBox="0 0 500 500" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="250" cy="250" r="240" stroke="white" stroke-width="1.5"/>
+    <circle cx="250" cy="250" r="180" stroke="white" stroke-width="1"/>
+    <circle cx="250" cy="250" r="120" stroke="white" stroke-width="0.8"/>
+    <!-- power line crosshatch -->
+    <line x1="10" y1="250" x2="490" y2="250" stroke="white" stroke-width="1.5"/>
+    <line x1="250" y1="10" x2="250" y2="490" stroke="white" stroke-width="1.5"/>
+    <line x1="80" y1="80" x2="420" y2="420" stroke="white" stroke-width="1"/>
+    <line x1="420" y1="80" x2="80" y2="420" stroke="white" stroke-width="1"/>
+    <!-- tower shapes -->
+    <rect x="235" y="100" width="30" height="300" fill="white" opacity="0.8"/>
+    <polygon points="250,60 220,110 280,110" fill="white" opacity="0.9"/>
+    <line x1="180" y1="200" x2="250" y2="200" stroke="white" stroke-width="2"/>
+    <line x1="250" y1="200" x2="320" y2="200" stroke="white" stroke-width="2"/>
+  </svg>
+
+  <div class="cover-content">
+    <div class="ftd-badge">🔥 FTD Launch · 2026 Edition</div>
+    <h1>West Coast Wildfire<br>Mitigation Guide</h1>
+    <p class="cover-sub">A comprehensive framework for utilities and service providers to build, implement, and sustain a world-class wildfire mitigation program across California, Oregon, and Washington.</p>
+
+    <div class="cover-meta">
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Published by</span>
+        <span class="cover-meta-value">FTD Launch</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Edition</span>
+        <span class="cover-meta-value">2026</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Focus Region</span>
+        <span class="cover-meta-value">CA · OR · WA</span>
+      </div>
+      <div class="cover-meta-item">
+        <span class="cover-meta-label">Audience</span>
+        <span class="cover-meta-value">Utilities & Service Providers</span>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="chapter-divider"></div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- EXECUTIVE SUMMARY -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="executive-summary" class="section-pad" style="background:white;">
+  <div class="container">
+    <div class="section-label">Overview</div>
+    <h2>Executive Summary</h2>
+    <p class="lead">Wildfire risk on the West Coast is no longer a seasonal event — it is a permanent operational reality. Utilities and service providers operating across California, Oregon, and Washington face mounting regulatory obligations, rising liability exposure, and a transforming climate that demands proactive, data-driven action.</p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <div class="stat-num">47,000+</div>
+        <div class="stat-label">Circuit Miles Protected</div>
+        <div class="stat-context">CA circuit miles under Enhanced Powerline Safety Settings as of 2025</div>
+      </div>
+      <div class="stat-card blue">
+        <div class="stat-num">69%</div>
+        <div class="stat-label">Ignition Reduction</div>
+        <div class="stat-context">PG&E reduction in ignitions during elevated fire conditions since EPSS pilot (2021)</div>
+      </div>
+      <div class="stat-card red">
+        <div class="stat-num">2M+</div>
+        <div class="stat-label">Acres Burned</div>
+        <div class="stat-context">Oregon 2024 fire season — a record-breaking year for the state</div>
+      </div>
+      <div class="stat-card green">
+        <div class="stat-num">9 States</div>
+        <div class="stat-label">WMP Mandates</div>
+        <div class="stat-context">States now legally requiring Wildfire Mitigation Plans, including CA, OR, and WA</div>
+      </div>
+      <div class="stat-card teal">
+        <div class="stat-num">$180M</div>
+        <div class="stat-label">UAS Savings</div>
+        <div class="stat-context">Achieved by one CA utility through drone inspection programs (Cyberhawk, 2025)</div>
+      </div>
+      <div class="stat-card" style="border-top-color:#8B5CF6;">
+        <div class="stat-num">95%</div>
+        <div class="stat-label">Risk Eliminated</div>
+        <div class="stat-context">Wildfire ignition risk reduction when powerlines moved underground (PG&E, 2025)</div>
+      </div>
+    </div>
+
+    <p>This guide draws on publicly filed Wildfire Mitigation Plans, field-validated inspection methodologies, regulatory frameworks from the CPUC, Cal OEIS, OPUC (Oregon), and WUTC (Washington), and proven vendor technologies. It is intended as both a <strong>strategic planning resource</strong> and an <strong>operational reference</strong> for utilities, joint-use infrastructure operators, and contracted service providers.</p>
+
+    <div class="callout dark">
+      <div class="callout-label">FTD Launch Mission</div>
+      <h4>Empowering Operators to Stop Ignitions Before They Start</h4>
+      <p>FTD Launch specializes in training and equipping drone pilots and infrastructure professionals to deliver the inspection, data, and situational awareness capabilities that form the backbone of modern wildfire mitigation programs. This guide is your roadmap to building a program that meets regulatory requirements, reduces liability, and protects the communities you serve.</p>
+    </div>
+  </div>
+</div>
+
+<!-- TABLE OF CONTENTS -->
+<div style="background:var(--ftd-light);" class="section-pad" id="toc">
+  <div class="container">
+    <div class="toc">
+      <div class="toc-title">Table of Contents</div>
+      <div class="toc-grid">
+        <a class="toc-item" href="#ch1"><span class="toc-num">01</span><span class="toc-text">West Coast Fire Risk Landscape</span></a>
+        <a class="toc-item" href="#ch2"><span class="toc-num">02</span><span class="toc-text">Regulatory Framework (CA / OR / WA)</span></a>
+        <a class="toc-item" href="#ch3"><span class="toc-num">03</span><span class="toc-text">Wildfire Risk Scoring System (WRS / DWRI / TRS)</span></a>
+        <a class="toc-item" href="#ch4"><span class="toc-num">04</span><span class="toc-text">Drone & LiDAR Inspection Operations</span></a>
+        <a class="toc-item" href="#ch5"><span class="toc-num">05</span><span class="toc-text">Vegetation Management Program</span></a>
+        <a class="toc-item" href="#ch6"><span class="toc-num">06</span><span class="toc-text">System Hardening & Undergrounding</span></a>
+        <a class="toc-item" href="#ch7"><span class="toc-num">07</span><span class="toc-text">Fire Weather Operations Protocol (FWOP)</span></a>
+        <a class="toc-item" href="#ch8"><span class="toc-num">08</span><span class="toc-text">Developing a Wildfire Mitigation Plan</span></a>
+        <a class="toc-item" href="#ch9"><span class="toc-num">09</span><span class="toc-text">Technology & Data Infrastructure</span></a>
+        <a class="toc-item" href="#ch10"><span class="toc-num">10</span><span class="toc-text">Stakeholder Communications</span></a>
+        <a class="toc-item" href="#appendix-a"><span class="toc-num">A</span><span class="toc-text">Appendix A – Risk Scoring Tables</span></a>
+        <a class="toc-item" href="#appendix-b"><span class="toc-num">B</span><span class="toc-text">Appendix B – Program Readiness Checklist</span></a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 1 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch1">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 01</div>
+    <h2>West Coast Fire Risk Landscape</h2>
+    <p>Understanding the geographic, climatic, and infrastructure threats driving utility wildfire exposure across California, Oregon, and Washington.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <div class="section-label">Fire Statistics</div>
+      <h3>2024–2025 Season Overview</h3>
+      <p class="lead">The West Coast experienced two consecutive record-stress fire seasons. Oregon shattered its all-time record in 2024. Washington more than doubled its 10-year average. California maintained near-record pace with over 1 million acres burned.</p>
+
+      <div class="hbar-chart">
+        <div class="hbar-row">
+          <span class="hbar-label">California 2024</span>
+          <div class="hbar-track"><div class="hbar-fill" style="width:52%;background:linear-gradient(90deg,#ef4444,#f97316);">1.04M acres</div></div>
+          <span class="hbar-value">7,594 fires</span>
+        </div>
+        <div class="hbar-row">
+          <span class="hbar-label">Oregon 2024</span>
+          <div class="hbar-track"><div class="hbar-fill" style="width:100%;background:linear-gradient(90deg,#dc2626,#ef4444);">2.0M acres (record)</div></div>
+          <span class="hbar-value">2,039 fires</span>
+        </div>
+        <div class="hbar-row">
+          <span class="hbar-label">Washington 2024</span>
+          <div class="hbar-track"><div class="hbar-fill" style="width:14%;background:linear-gradient(90deg,#f59e0b,#f97316);">288K acres</div></div>
+          <span class="hbar-value">1,686 fires</span>
+        </div>
+        <div class="hbar-row">
+          <span class="hbar-label">PNW Total 2024</span>
+          <div class="hbar-track"><div class="hbar-fill" style="width:100%;background:linear-gradient(90deg,#7f1d1d,#dc2626);">2.2M+ acres (record)</div></div>
+          <span class="hbar-value">All ownerships</span>
+        </div>
+        <div class="hbar-row">
+          <span class="hbar-label">Pacific NW 2025</span>
+          <div class="hbar-track"><div class="hbar-fill" style="width:25%;background:linear-gradient(90deg,#22c55e,#16a34a);">~500K acres</div></div>
+          <span class="hbar-value">4,466 fires</span>
+        </div>
+      </div>
+
+      <div class="callout blue">
+        <div class="callout-label">Key Insight</div>
+        <h4>63% of 2025 Pacific NW Fires Were Human-Caused</h4>
+        <p>USDA Forest Service data shows human ignitions dominated early and mid-season activity across Oregon and Washington in 2025, reinforcing the importance of infrastructure-focused prevention and public awareness programs — both areas where service providers can drive measurable reduction.</p>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">High Fire Threat Districts (HFTD) — California</h3>
+      <p>The California Public Utilities Commission (CPUC) designates High Fire-Threat Districts (HFTD) through a Tier system based on utility-caused ignition risk — separate from CAL FIRE's own hazard severity maps. All three investor-owned utilities (PG&E, SCE, SDG&E) are required to apply enhanced safety protocols within HFTD boundaries.</p>
+
+      <div class="tier-bar">
+        <div class="tier-segment tier-seg-1">Tier 1 – Elevated</div>
+        <div class="tier-segment tier-seg-2">Tier 2 – High</div>
+        <div class="tier-segment tier-seg-3">Tier 3 – Extreme</div>
+        <div class="tier-segment tier-seg-hfra">HFRA</div>
+      </div>
+      <p style="font-size:0.8rem;color:var(--ftd-muted);margin-top:-0.5rem;">HFTD tiers from CPUC designation. HFRA = High Fire-Risk Area (utility-defined internal zones, often more stringent than HFTD).</p>
+
+      <h3 style="margin-top:2.5rem;">Oregon & Washington Wildfire Risk Zones</h3>
+      <p>Oregon's Office of State Fire Marshal and the Washington Utilities and Transportation Commission (WUTC) have both adopted WMP requirements, with Oregon passing modified liability legislation and Washington implementing mandatory annual filings. PacifiCorp — serving both states — maintains active WMPs under both Oregon's and California's frameworks.</p>
+
+      <div class="cards-3">
+        <div class="card accent-border">
+          <div class="card-icon">🔥</div>
+          <h4>California High Risk Zones</h4>
+          <p>Sierra Nevada foothills, Central Coast ranges, North Bay/Wine Country, Southern California mountains, Inland Empire interface — all mapped in HFTD Tier 2/3.</p>
+        </div>
+        <div class="card accent-border blue">
+          <div class="card-icon">🌲</div>
+          <h4>Oregon Risk Zones</h4>
+          <p>Cascade Range east slopes, Rogue Valley, Eastern Oregon high desert, Willamette Valley fringe — driven by dryness, easterly winds, and dense fuel loads.</p>
+        </div>
+        <div class="card accent-border green">
+          <div class="card-icon">💨</div>
+          <h4>Washington Risk Zones</h4>
+          <p>Okanogan Highlands, Eastern Cascades, Columbia Basin — prone to extreme wind events. Washington had 288,000+ acres burned in 2024, over double the 10-year average.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Key Ignition Drivers in Utility Infrastructure</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Conductor-Vegetation Contact</h4>
+            <p>Tree and branch contact with energized conductors — especially under high wind conditions — is the single largest utility-caused ignition pathway. HFTD areas require minimum 4-ft clearance; non-HFTD requires 1.5 ft.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Equipment Failure & Arcing</h4>
+            <p>Aged hardware, corroded conductors, and damaged insulators can arc or spark under normal operating conditions. Thermal imaging inspections detect high-resistance connections before they fail.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Structural Failure</h4>
+            <p>Pole lean, groundline deterioration, and overloaded joint-use attachments can cause conductor drop events — especially under wind or ice loading. Intrusive groundline inspections are critical in WUI zones.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Animal & Foreign Object Contact</h4>
+            <p>Squirrels, raptors, and mylar balloons account for a significant proportion of distribution-level ignitions. Animal guards, raptor diverters, and covered conductors reduce this risk.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Down Conductor Events</h4>
+            <p>High-impedance faults from down conductors — where a broken energized line contacts ground without tripping a breaker — are a leading cause of fire starts. Down Conductor Detection (DCD) technology addresses this gap.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 2 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch2">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 02</div>
+    <h2>Regulatory Framework</h2>
+    <p>A state-by-state guide to WMP mandates, filing requirements, liability structures, and oversight bodies across California, Oregon, and Washington.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+
+      <div class="section-label">Key Regulators</div>
+      <h3>Oversight Bodies at a Glance</h3>
+
+      <div class="utility-row">
+        <div class="utility-badge"><div class="utility-dot" style="background:#0053A0;"></div>CPUC – California Public Utilities Commission</div>
+        <div class="utility-badge"><div class="utility-dot" style="background:#00843D;"></div>Cal OEIS – Office of Energy Infrastructure Safety</div>
+        <div class="utility-badge"><div class="utility-dot" style="background:#D4421A;"></div>CAL FIRE – Dept. of Forestry & Fire Protection</div>
+        <div class="utility-badge"><div class="utility-dot" style="background:#6B21A8;"></div>OPUC – Oregon Public Utility Commission</div>
+        <div class="utility-badge"><div class="utility-dot" style="background:#0369A1;"></div>WUTC – Washington UTC</div>
+        <div class="utility-badge"><div class="utility-dot" style="background:#92400E;"></div>NERC / FERC – Federal Reliability</div>
+      </div>
+
+      <div class="table-wrap" style="margin-top:1.5rem;">
+        <table>
+          <thead>
+            <tr>
+              <th>State</th>
+              <th>WMP Requirement</th>
+              <th>Filing Frequency</th>
+              <th>Review Body</th>
+              <th>Liability Standard</th>
+              <th>Key Rule/Law</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>California</strong></td>
+              <td>Mandatory – all IOUs and certain POUs</td>
+              <td>Annual (shifting to 4-year cycle per SB 254)</td>
+              <td>Cal OEIS (approval); CPUC (cost review)</td>
+              <td>Inverse condemnation + modified if WMP approved</td>
+              <td>SB 901 (2018), SB 254, PUC §8386</td>
+            </tr>
+            <tr>
+              <td><strong>Oregon</strong></td>
+              <td>Mandatory (2022+)</td>
+              <td>Annual</td>
+              <td>OPUC</td>
+              <td>Modified damages (independent of WMP)</td>
+              <td>ORS 757; HB 2005 (2021)</td>
+            </tr>
+            <tr>
+              <td><strong>Washington</strong></td>
+              <td>Mandatory (2023+)</td>
+              <td>Annual</td>
+              <td>WUTC</td>
+              <td>Negligence-based; WMP supports liability defense</td>
+              <td>HB 1709 (2023)</td>
+            </tr>
+            <tr>
+              <td><strong>Federal</strong></td>
+              <td>Voluntary (NERC/FERC standards apply)</td>
+              <td>Varies</td>
+              <td>NERC / FERC</td>
+              <td>Federal reliability standards; BES risk</td>
+              <td>NERC FAC-003; FERC Order 849</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">California Requirements in Detail</h3>
+      <p>California maintains the most mature and prescriptive wildfire regulatory regime in the nation. Under SB 901 (2018), every electrical corporation in the state must submit a Wildfire Mitigation Plan annually to Cal OEIS for review and approval. The CPUC provides supplemental review, particularly for cost recovery. California's WMP requirements cover:</p>
+
+      <div class="cards-2" style="margin-top:1rem;">
+        <div class="card accent-border">
+          <h4>General Order 95 (GO 95)</h4>
+          <p>Prescribes construction standards for overhead electric lines, including conductor clearances, pole strength, and workmanship. Utilities must demonstrate GO 95 compliance in all HFTD areas.</p>
+        </div>
+        <div class="card accent-border blue">
+          <h4>General Order 165 (GO 165)</h4>
+          <p>Mandates inspection schedules for overhead electric facilities. Requires detailed and patrol inspections on defined cycles, with enhanced frequency in HFTD areas.</p>
+        </div>
+        <div class="card accent-border">
+          <h4>CA Public Resources Code §4292–4293</h4>
+          <p>Requires utilities to maintain clearances around poles (10 ft to powerlines) and to remove "hazard trees" from the potential fall zone within HFTD areas. Governs firebreaks and fuel management.</p>
+        </div>
+        <div class="card accent-border blue">
+          <h4>CPUC Resolution ESRB-4</h4>
+          <p>Extends hazardous tree removal requirements to the potential fall zone of powerlines in Tier 2 and 3 HFTD areas — requiring proactive removal even where no immediate clearance violation exists.</p>
+        </div>
+      </div>
+
+      <div class="callout green" style="margin-top:1.5rem;">
+        <div class="callout-label">Service Provider Obligation</div>
+        <h4>How This Affects Contractors and Service Providers</h4>
+        <p>Service providers performing inspections, vegetation management, or pole work within HFTD areas must demonstrate alignment with GO 95, GO 165, and PRC §4292–4293. FTD Launch drone programs are designed to generate the data formats and audit trails required for regulatory defensibility across all three states.</p>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">WMP Filing Components</h3>
+      <p>A complete WMP submission to Cal OEIS / OPUC / WUTC typically includes the following sections. Service providers supporting utility WMP programs should understand these elements to align deliverables accordingly.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 1</div>
+          <div class="timeline-title">Wildfire Risk Assessment & HFTD Mapping</div>
+          <div class="timeline-body">GIS-based risk mapping, Fire Potential Index inputs, ignition probability models, and exposure analysis by service territory.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 2</div>
+          <div class="timeline-title">Inspection & Asset Management Programs</div>
+          <div class="timeline-body">Detailed inspection schedules, drone/LiDAR programs, defect tracking, and corrective action workflows — including GO 165 compliance data.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 3</div>
+          <div class="timeline-title">Vegetation Management Plan</div>
+          <div class="timeline-body">Annual scope of work, clearance standards, hazard tree program, quality processes, and arborist certification documentation.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 4</div>
+          <div class="timeline-title">Grid Hardening & System Upgrades</div>
+          <div class="timeline-body">Undergrounding targets, covered conductor installation, pole replacement priorities, and substation hardening metrics.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 5</div>
+          <div class="timeline-title">Situational Awareness & Technology</div>
+          <div class="timeline-body">Weather monitoring infrastructure, camera networks, EPSS/PSPS protocols, AI/ML modeling, and data platform architecture.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 6</div>
+          <div class="timeline-title">Emergency Response & Coordination</div>
+          <div class="timeline-body">SIPT/crew deployment plans, agency coordination protocols, ICS integration, and PSPS communications framework.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Section 7</div>
+          <div class="timeline-title">Performance Metrics & Commitments</div>
+          <div class="timeline-body">Quantified KPIs for ignition reduction, asset inspection completion, vegetation work, and grid hardening milestones with Quarterly Data Report (QDR) commitments.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 3 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch3">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 03</div>
+    <h2>Wildfire Risk Scoring System</h2>
+    <p>A field-deployable, zero-ambiguity dual-layer risk model that combines infrastructure condition with real-time environmental data to produce a single actionable score.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <div class="section-label">System Architecture</div>
+      <h3>The Three-Score Model: WRS → DWRI → TRS</h3>
+      <p class="lead">Effective wildfire risk management requires more than knowing what an asset looks like today — it requires knowing how dangerous it is right now. The FTD Launch scoring framework integrates three complementary scores into a unified Total Risk Score that drives all operational decisions.</p>
+
+      <div class="diagram-box">
+        <div class="diagram-title">Figure 1 – Risk Score Architecture</div>
+        <div class="diagram-svg-wrap">
+          <svg viewBox="0 0 700 220" width="100%" style="max-width:680px;" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <!-- WRS Box -->
+            <rect x="20" y="60" width="170" height="100" rx="12" fill="#1e293b"/>
+            <text x="105" y="97" text-anchor="middle" fill="#F97316" font-size="11" font-weight="700" font-family="Inter">WILDFIRE RISK SCORE</text>
+            <text x="105" y="116" text-anchor="middle" fill="white" font-size="22" font-weight="900" font-family="Inter">WRS</text>
+            <text x="105" y="140" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter">Infrastructure Condition</text>
+            <text x="105" y="153" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter">Field Inspections · Defects</text>
+            <!-- DWRI Box -->
+            <rect x="265" y="60" width="170" height="100" rx="12" fill="#1e293b"/>
+            <text x="350" y="97" text-anchor="middle" fill="#3B82F6" font-size="11" font-weight="700" font-family="Inter">DYNAMIC RISK INDEX</text>
+            <text x="350" y="116" text-anchor="middle" fill="white" font-size="22" font-weight="900" font-family="Inter">DWRI</text>
+            <text x="350" y="140" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter">Environmental Conditions</text>
+            <text x="350" y="153" text-anchor="middle" fill="rgba(255,255,255,0.5)" font-size="9" font-family="Inter">Wind · Temp · Humidity · Fuels</text>
+            <!-- TRS Box -->
+            <rect x="510" y="40" width="170" height="140" rx="12" fill="#F97316"/>
+            <text x="595" y="90" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="11" font-weight="700" font-family="Inter">TOTAL RISK SCORE</text>
+            <text x="595" y="116" text-anchor="middle" fill="white" font-size="28" font-weight="900" font-family="Inter">TRS</text>
+            <text x="595" y="142" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9" font-family="Inter">All Decisions · Prioritization</text>
+            <text x="595" y="157" text-anchor="middle" fill="rgba(255,255,255,0.8)" font-size="9" font-family="Inter">Engineering · Field Response</text>
+            <!-- Arrows -->
+            <path d="M 192 110 L 263 110" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="227" y="104" text-anchor="middle" fill="#F97316" font-size="9" font-family="Inter">×</text>
+            <path d="M 437 110 L 508 110" stroke="#64748b" stroke-width="2" marker-end="url(#arrowhead)"/>
+            <text x="472" y="104" text-anchor="middle" fill="#3B82F6" font-size="9" font-family="Inter">→</text>
+            <!-- Formula below -->
+            <text x="350" y="195" text-anchor="middle" fill="#334155" font-size="11" font-weight="600" font-family="Inter">TRS = WRS × (1 + DWRI)</text>
+            <defs>
+              <marker id="arrowhead" markerWidth="6" markerHeight="6" refX="3" refY="3" orient="auto">
+                <path d="M 0 0 L 6 3 L 0 6 z" fill="#64748b"/>
+              </marker>
+            </defs>
+          </svg>
+        </div>
+      </div>
+
+      <div class="formula-box">
+        <span>TRS</span> = <span>WRS</span> × (1 + <span>DWRI</span>)
+        <div style="font-size:0.75rem;color:rgba(255,255,255,0.5);margin-top:0.5rem;">Where WRS = 0–100 (condition-based) and DWRI = 0.0–1.0 (environment-based)</div>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">WRS — Wildfire Risk Score</h3>
+      <p>The WRS evaluates each infrastructure asset across five weighted categories using a structured 0–5 scale that eliminates subjective scoring.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Category</th><th>Weight</th><th>What It Measures</th><th>Key Risk Indicator</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Structural Integrity</strong></td><td>25%</td><td>Pole lean, groundline condition, shell rot, cracking, guy wire stability</td><td>Pole lean &gt;15°, confirmed groundline failure → Score 5</td></tr>
+            <tr><td><strong>Clearance Compliance</strong></td><td>20%</td><td>Conductor-to-attachment spacing, sag, equipment crowding</td><td>Conductor contact or imminent contact → Score 5</td></tr>
+            <tr><td><strong>Vegetation Risk</strong></td><td>20%</td><td>Proximity of trees/brush to energized conductors</td><td>Vegetation contacting conductor + dry conditions → Score 5</td></tr>
+            <tr><td><strong>Environmental Exposure</strong></td><td>20%</td><td>Terrain slope, wind corridors, WUI proximity, fuel density</td><td>Historical fire zone + steep terrain + high wind → Score 5</td></tr>
+            <tr><td><strong>Asset Condition</strong></td><td>15%</td><td>Crossarms, insulators, conductor, transformers, attachments</td><td>Failed condition, hanging cable, detached equipment → Score 5</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">DWRI — Dynamic Wildfire Risk Index</h3>
+      <p>The DWRI is calculated daily (or in real-time during fire weather events) from five environmental inputs, normalized to a 0.0–1.0 scale.</p>
+
+      <div class="cards-3">
+        <div class="card accent-border">
+          <div class="card-icon">💨</div>
+          <h4>Wind Speed</h4>
+          <p>Score 0–5 based on sustained wind velocity. ≥30 mph = Score 4. Red Flag/gusting ≥50 mph = Score 5. Primary driver of conductor movement and fire spread.</p>
+        </div>
+        <div class="card accent-border blue">
+          <div class="card-icon">🌡️</div>
+          <h4>Temperature</h4>
+          <p>Score 0–5 based on ambient temperature. Elevated temps accelerate conductor sag and vegetation drying. Combined with low humidity = compounding risk.</p>
+        </div>
+        <div class="card accent-border">
+          <div class="card-icon">💧</div>
+          <h4>Relative Humidity</h4>
+          <p>Score 0–5 inversely correlated with humidity. Below 15% = Score 5. Low humidity is the single greatest accelerant to ignition probability.</p>
+        </div>
+        <div class="card accent-border blue">
+          <div class="card-icon">🌿</div>
+          <h4>Fuel Moisture</h4>
+          <p>Score 0–5 based on dead fuel moisture content. Below 9% = Score 5. Integrates seasonal drought data, recent precipitation, and field samples.</p>
+        </div>
+        <div class="card accent-border">
+          <div class="card-icon">🚨</div>
+          <h4>Fire Weather Alerts</h4>
+          <p>Score 0 (none), 2 (Fire Weather Watch), 3 (Red Flag Warning), 5 (active Red Flag + advisory). Official NOAA designations automatically escalate DWRI.</p>
+        </div>
+      </div>
+
+      <div class="formula-box" style="margin-top:1.5rem;">
+        DWRI = (Wind + Temperature + Humidity + Fuel Moisture + Alerts) ÷ 25
+      </div>
+
+      <h3 style="margin-top:2.5rem;">TRS Risk Bands & Required Actions</h3>
+      <div class="score-band">
+        <div class="score-item score-low">
+          <div class="score-range">0–20</div>
+          <div class="score-label">Low</div>
+          <div class="score-action">Standard inspection cycle; routine monitoring</div>
+        </div>
+        <div class="score-item score-mod">
+          <div class="score-range">21–40</div>
+          <div class="score-label">Moderate</div>
+          <div class="score-action">Schedule maintenance; monitor defect progression</div>
+        </div>
+        <div class="score-item score-elev">
+          <div class="score-range">41–60</div>
+          <div class="score-label">Elevated</div>
+          <div class="score-action">Near-term maintenance; engineering screening required</div>
+        </div>
+        <div class="score-item score-high">
+          <div class="score-range">61–80</div>
+          <div class="score-label">High</div>
+          <div class="score-action">Expedited correction; pole loading analysis required</div>
+        </div>
+        <div class="score-item score-sev">
+          <div class="score-range">81–100</div>
+          <div class="score-label">Severe</div>
+          <div class="score-action">Immediate prioritization; engineering action required</div>
+        </div>
+        <div class="score-item score-crit">
+          <div class="score-range">100+</div>
+          <div class="score-label">Critical</div>
+          <div class="score-action">Fire-Day Protocol; emergency stabilization or de-energization</div>
+        </div>
+      </div>
+
+      <div class="callout red" style="margin-top:1rem;">
+        <div class="callout-label">Critical Rule</div>
+        <h4>All Elevated-or-Higher Assets Treated as High Risk During Fire Weather Events</h4>
+        <p>During any DWRI ≥ 0.6 condition, all assets with TRS ≥ 41 (Elevated) must be managed as High Risk minimum. Do not rely on pre-computed TRS values during active FWOP activations — re-score dynamically.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 4 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch4">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 04</div>
+    <h2>Drone & LiDAR Inspection Operations</h2>
+    <p>How to design, deploy, and scale a FAA Part 107-compliant drone inspection program that meets GO 165 requirements, generates regulatory-defensible data, and delivers measurable wildfire risk reduction.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+
+      <div class="section-label">Why Drones</div>
+      <h3>The Case for UAS-Based Utility Inspection</h3>
+      <p class="lead">Drone inspections find an average of 50% more issues than traditional ground-based methods, while reducing inspection costs by up to 25% and eliminating many of the safety risks associated with climbing or helicopter work.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card">
+          <div class="stat-num">50%</div>
+          <div class="stat-label">More Defects Found</div>
+          <div class="stat-context">Drone inspections vs. ground-based patrol (Constellation Clearsight)</div>
+        </div>
+        <div class="stat-card blue">
+          <div class="stat-num">200,000</div>
+          <div class="stat-label">Miles Inspected</div>
+          <div class="stat-context">Cyberhawk supporting two CA utilities across distribution lines (2025)</div>
+        </div>
+        <div class="stat-card green">
+          <div class="stat-num">25%</div>
+          <div class="stat-label">Cost Reduction</div>
+          <div class="stat-context">Vegetation management cost savings by eliminating unnecessary truck rolls</div>
+        </div>
+        <div class="stat-card red">
+          <div class="stat-num">$180M</div>
+          <div class="stat-label">Program Savings</div>
+          <div class="stat-context">One California utility's UAS program cumulative savings (Cyberhawk, 2025)</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Inspection Sensor Stack</h3>
+      <p>Modern utility wildfire inspections require a multi-sensor approach. A single flight can simultaneously feed multiple data products when properly configured:</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Sensor</th><th>Primary Use</th><th>Wildfire Application</th><th>Key Output</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>RGB Camera (4K+)</strong></td><td>Visual asset inspection</td><td>Structural defects, hardware condition, attachment identification</td><td>Close Visual Inspection (CVI) images; defect photo evidence</td></tr>
+            <tr><td><strong>LiDAR</strong></td><td>3D point cloud mapping</td><td>Conductor sag, vegetation encroachment distance, clearance violations</td><td>Engineering-grade clearance data; GO 95 compliance documentation</td></tr>
+            <tr><td><strong>Thermal / Infrared</strong></td><td>Heat anomaly detection</td><td>Overheated connections, failing insulators, degraded conductors</td><td>Pre-failure detection before visible signs appear</td></tr>
+            <tr><td><strong>Multispectral</strong></td><td>Vegetation health mapping</td><td>Fuel moisture estimation, dying/stressed vegetation identification</td><td>Priority vegetation management targeting</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">GO 165 Inspection Schedule Alignment</h3>
+      <p>California's GO 165 mandates specific inspection types and frequencies. Drone programs must be designed to fulfill — and document — these requirements in HFTD areas.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Asset Type</th><th>Inspection Type</th><th>Frequency</th><th>UAS Role</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Transmission</td><td>Detailed Inspection</td><td>Every 3 years</td><td>Primary — replaces or supplements ground crew</td></tr>
+            <tr><td>Transmission</td><td>Infrared Aerial</td><td>Every 3 years</td><td>Primary — thermal payload required</td></tr>
+            <tr><td>Transmission</td><td>Climbing Inspection</td><td>Every 3 years</td><td>Supplement — close-in visual before climbing decision</td></tr>
+            <tr><td>Distribution</td><td>Detailed Inspection</td><td>Every 3 years</td><td>Primary — high-volume, scalable coverage</td></tr>
+            <tr><td>Distribution</td><td>Overhead Equipment</td><td>Every 3 years</td><td>Primary — hardware and attachment condition</td></tr>
+            <tr><td>Distribution</td><td>Aerial / LiDAR</td><td>Varies; once for LiDAR</td><td>Primary — initial LiDAR baseline required</td></tr>
+            <tr><td>Distribution</td><td>Ground Patrol</td><td>As needed, HFTD</td><td>Supplement — drone confirms flagged locations</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">FAA Part 107 Program Requirements</h3>
+      <p>All commercial UAS operations for utility inspection must be conducted under FAA Part 107. Key operational requirements for HFTD work include:</p>
+
+      <div class="checklist">
+        <li>Valid FAA Part 107 Remote Pilot Certificate for all UAS operators</li>
+        <li>UAS registration with FAA for all aircraft &gt;0.55 lbs</li>
+        <li>Pre-flight airspace authorization via LAANC or FAA DroneZone for controlled airspace near airports</li>
+        <li>TFR compliance monitoring — active wildfires, PSPS events, and utility work may trigger TFRs</li>
+        <li>BVLOS waiver required for beyond-visual-line-of-sight corridor inspections (COA or waiver)</li>
+        <li>Night waiver or Part 107.29 compliance for thermal/infrared operations at dusk/dawn</li>
+        <li>Crew communication and hazard protocols documented in Site-Specific Safety Plans (SSSP)</li>
+        <li>Digital logbooks and inspection data stored in regulatory-defensible format</li>
+        <li>Chain-of-custody documentation from capture → processing → delivery to utility</li>
+      </div>
+
+      <div class="callout dark">
+        <div class="callout-label">FTD Launch Value Proposition</div>
+        <h4>From Certified Pilot to Utility-Ready Inspector</h4>
+        <p>FTD Launch training programs prepare drone pilots not just to pass the Part 107 exam, but to operate within the specific protocols, data standards, and documentation requirements that utility clients demand. This includes defect classification, photo evidence standards, GPS tagging, and QAQC workflows that directly feed WMP compliance reporting.</p>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Data Workflow: Capture to Corrective Action</h3>
+      <div class="steps">
+        <div class="step">
+          <div class="step-num">1</div>
+          <div class="step-body">
+            <h4>Pre-Flight Planning & Risk Assessment</h4>
+            <p>Review GIS asset list, confirm pole IDs and coordinates, check airspace, weather, and TFRs. Complete SSSP. Load flight plan into GCS.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">2</div>
+          <div class="step-body">
+            <h4>Multi-Sensor Data Capture</h4>
+            <p>Execute structured flight pattern: CVI orbit at 8–15 ft, LiDAR corridor pass, thermal scan of conductors and hardware. Capture minimum 6–12 images per structure with GPS tagging.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">3</div>
+          <div class="step-body">
+            <h4>Field QAQC & Data Validation</h4>
+            <p>Review imagery in field before departing. Confirm all required structure photos captured. Flag re-flights for missed or obstructed assets. Complete digital inspection form with WRS inputs.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">4</div>
+          <div class="step-body">
+            <h4>Processing & AI Defect Detection</h4>
+            <p>Upload raw data to inspection platform (e.g., iHawk, Sherlock). AI models flag anomalies. Human review confirms and classifies defects per Priority 1/2/3 criteria.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">5</div>
+          <div class="step-body">
+            <h4>Risk Scoring & Work Package Generation</h4>
+            <p>WRS calculated per asset. DWRI applied to generate TRS. System generates prioritized work packages by geographic cluster, risk band, and responsible party.</p>
+          </div>
+        </div>
+        <div class="step">
+          <div class="step-num">6</div>
+          <div class="step-body">
+            <h4>Engineering Review & Regulatory Reporting</h4>
+            <p>High-TRS assets routed to engineering for pole loading or MRE. Completed inspections exported to WMP QDR format. All records retained for audit trail.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 5 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch5">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 05</div>
+    <h2>Vegetation Management Program</h2>
+    <p>From clearance standards to hazard tree programs — building a defensible, data-driven vegetation management operation aligned with state regulations.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <p class="lead">Vegetation management is the highest-volume component of any WMP. In California alone, major utilities inspect approximately 80,000 miles of distribution overhead lines annually. Across Oregon and Washington, similar obligations exist — and drone-enabled aerial inspection is transforming how this work is scoped, prioritized, and verified.</p>
+
+      <h3>Clearance Standards by Zone</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Location</th><th>Minimum Clearance (Radial)</th><th>Clearance at Time of Trim</th><th>Authority</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Non-HFTD Distribution</td><td>1.5 ft</td><td>Greater to ensure year-round compliance</td><td>GO 95, App. E</td></tr>
+            <tr><td>HFTD Distribution</td><td>4 ft</td><td>Greater to ensure year-round compliance</td><td>GO 95, App. E + PRC §4293</td></tr>
+            <tr><td>Utility Poles (to powerlines)</td><td>10 ft vertical clearance</td><td>Firebreak maintained to powerlines</td><td>PRC §4292</td></tr>
+            <tr><td>Hazardous Tree (fall zone)</td><td>Full removal required</td><td>N/A – tree removed</td><td>GO 95 + ESRB-4</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Two-Program Distribution Model</h3>
+      <div class="cards-2">
+        <div class="card accent-border">
+          <h4>Distribution Routine Patrol</h4>
+          <p>Annual inspection of all distribution overhead facilities to identify clearance violations and vegetation requiring trimming. Work is planned based on growth cycles and seasonal drying forecasts. Drone-assisted patrol replaces truck rolls in difficult terrain.</p>
+        </div>
+        <div class="card accent-border blue">
+          <h4>Distribution Hazard Patrol</h4>
+          <p>Enhanced patrol in high-risk and high-consequence areas targeting hazard trees — those with structural defects, root damage, or disease that create fall-zone risk regardless of current clearance status. Requires TRAQ-certified arborist decision support.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Vegetation Risk Scoring Integration</h3>
+      <p>Vegetation risk is scored using the same 0–5 scale as other WRS categories. However, vegetation scores interact directly with Environmental Exposure and Fuel Moisture DWRI inputs — meaning a vegetation score of 3 during a Red Flag Warning escalates the TRS far more dramatically than during a wet winter patrol.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Vegetation Score</th><th>Condition</th><th>Priority</th><th>Action Required</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="tag tag-p3">0</span></td><td>No vegetation within 10 ft of conductors</td><td>None</td><td>Routine monitoring</td></tr>
+            <tr><td><span class="tag tag-p3">1</span></td><td>Vegetation within 5–10 ft, no immediate risk</td><td>Low</td><td>Monitor; include in annual patrol scope</td></tr>
+            <tr><td><span class="tag tag-p2">2</span></td><td>Within 3–5 ft; seasonal growth may create contact</td><td>P3</td><td>Schedule for next patrol cycle</td></tr>
+            <tr><td><span class="tag tag-p2">3</span></td><td>Within 1–3 ft; overhang above conductor</td><td>P2</td><td>Schedule trim within 30 days</td></tr>
+            <tr><td><span class="tag tag-p1">4</span></td><td>Contacting communication cable or within strike distance</td><td>P2–P1</td><td>Expedited trim; evaluate for hazard tree designation</td></tr>
+            <tr><td><span class="tag tag-p1">5</span></td><td>Contacting energized conductor; dry conditions present</td><td>P1</td><td>Immediate — same-day trim or de-energization</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Technology Enablers</h3>
+      <div class="cards-3">
+        <div class="card accent-border">
+          <div class="card-icon">🛸</div>
+          <h4>LiDAR Clearance Measurement</h4>
+          <p>Engineering-grade point clouds from drone LiDAR provide sub-centimeter conductor-to-vegetation distance calculations — replacing manual measuring tapes and eliminating clearance estimation errors.</p>
+        </div>
+        <div class="card accent-border blue">
+          <div class="card-icon">🛰️</div>
+          <h4>Satellite Vegetation Monitoring</h4>
+          <p>Planet Labs delivers daily 3m-resolution imagery tracking vegetation encroachment, fuel drying, and growth patterns across entire service territories — enabling proactive work scoping between inspection cycles.</p>
+        </div>
+        <div class="card accent-border">
+          <div class="card-icon">🤖</div>
+          <h4>AI Strike Tree Detection</h4>
+          <p>Deep learning models trained on LiDAR achieve &gt;90% accuracy in identifying potential strike trees — prioritizing hazard tree programs to the highest-risk locations while reducing unnecessary removals.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 6 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch6">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 06</div>
+    <h2>System Hardening & Undergrounding</h2>
+    <p>Permanent risk reduction through infrastructure upgrades — covered conductors, strengthened poles, and undergrounding programs that eliminate ignition potential at its source.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+      <p class="lead">System hardening is the only tool that provides permanent, structural risk reduction. While operational programs (EPSS, PSPS, vegetation management) mitigate risk daily, hardening eliminates the ignition source entirely — and with it, the need for ongoing operational intervention.</p>
+
+      <div class="cards-2">
+        <div class="card dark-card">
+          <div class="card-icon">⬇️</div>
+          <h4>Undergrounding</h4>
+          <p>Moving powerlines underground eliminates approximately 98% of wildfire ignition risk permanently. PG&amp;E has completed 1,240+ miles since 2021 and is on track for 1,900 total miles by end of 2027, at an average cost of ~$3.25M/mile — down 25% from pre-2021 costs.</p>
+        </div>
+        <div class="card dark-card">
+          <div class="card-icon">⚡</div>
+          <h4>Covered Conductor & Pole Hardening</h4>
+          <p>Where undergrounding is not feasible, covered conductor installation reduces wildfire ignition risk by approximately 67%. Strengthened poles, fire-resistant crossarms, and additional support poles increase structural resilience under high wind and ice loading.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem;">Hardening Investment Priorities</h3>
+      <p>Risk models evaluate both probability (equipment type, inspection history, environmental exposure) and consequence (population density, structure density, ingress/egress) to determine where hardening delivers the greatest risk reduction per dollar invested.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Upgrade Type</th><th>Risk Reduction</th><th>Best Suited For</th><th>Key Benefit</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>Undergrounding (Primary)</td><td>~98%</td><td>Dense WUI, steep terrain, high-risk corridors</td><td>Permanent ignition elimination; 90% fewer outages</td></tr>
+            <tr><td>Covered Conductor</td><td>~67%</td><td>Areas where UG not feasible; rural HFTD</td><td>Cost-effective hardening; protects against object/vegetation contact</td></tr>
+            <tr><td>Fire-Resistant Poles</td><td>Structural</td><td>High-wind corridors, steep terrain</td><td>Reduces conductor drop risk; improves load tolerance</td></tr>
+            <tr><td>Reclosers / Fuse Savers</td><td>Operational</td><td>All HFTD circuits</td><td>Limits outage extent; reduces ignition duration if fault occurs</td></tr>
+            <tr><td>Down Conductor Detection (DCD)</td><td>High-impedance faults</td><td>EPSS-protected circuits</td><td>Detects ground contact without breaker trip</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout blue" style="margin-top:1.5rem;">
+        <div class="callout-label">Service Provider Opportunity</div>
+        <h4>Pre-Construction Assessment & Design Support</h4>
+        <p>Hardening programs require detailed pre-construction asset assessment, including pole loading analysis for new covered conductor weight, clearance validation for rerouting, and joint-use notification for telecommunications co-owners. Drone and LiDAR programs are used extensively in this pre-design phase to generate the precise geospatial data needed for engineering decisions.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 7 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch7">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 07</div>
+    <h2>Fire Weather Operations Protocol</h2>
+    <p>A three-tiered operational response framework activated when DWRI conditions indicate elevated ignition probability — transforming real-time weather data into immediate field actions.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <div class="callout red">
+        <div class="callout-label">Activation Trigger</div>
+        <h4>FWOP Activates When DWRI ≥ 0.6 OR Red Flag Warning Is Issued</h4>
+        <p>Once activated, the Fire Weather Operations Protocol overrides standard maintenance schedules. All operations shift to a risk-minimization posture. De-activation requires DWRI to fall below 0.4 for a sustained 24–48 hour period.</p>
+      </div>
+
+      <h3 style="margin-top:2rem;">Three-Level Response Model</h3>
+
+      <div class="cards-3">
+        <div class="card accent-border">
+          <div class="card-icon">🟡</div>
+          <h4>Level 1 — Elevated Awareness (DWRI 0.4–0.6)</h4>
+          <p>Increase high-risk asset monitoring. Review 72-hour weather forecast. Prepare crews and stage resources. Validate high-TRS pole lists for rapid escalation.</p>
+        </div>
+        <div class="card accent-border" style="border-top-color:#F59E0B;">
+          <div class="card-icon">🟠</div>
+          <h4>Level 2 — Active Readiness (DWRI 0.6–0.8)</h4>
+          <p>Pre-stage crews in high-risk corridors. Prioritize inspection of High/Severe TRS assets. Initiate targeted drone sweeps. Suspend non-essential work that adds attachment risk. Daily operational briefings.</p>
+        </div>
+        <div class="card accent-border" style="border-top-color:#EF4444;">
+          <div class="card-icon">🔴</div>
+          <h4>Level 3 — Full Activation (DWRI 0.8+ or Red Flag)</h4>
+          <p>Deploy rapid-response teams to highest-TRS assets. Real-time briefings. Emergency vegetation trimming where needed. Stabilize compromised structures. Consider PSPS/EPSS enablement in critical segments. All teams coordinate under unified command.</p>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem;">EPSS & PSPS Integration</h3>
+      <p>California utilities deploy two complementary powerline shutoff tools during elevated fire weather conditions. Understanding these tools is critical for service providers whose crews may be working during, before, or after activation events.</p>
+
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Program</th><th>Trigger</th><th>Scope</th><th>Customer Impact</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>EPSS</strong> — Enhanced Powerline Safety Settings</td><td>FPI ≥ R3; wind ≥19–25 mph; RH ≤20–25%; dead fuel moisture ≤9%</td><td>~47,000 circuit miles; 2M customers in/around HFRA</td><td>Rapid automatic shutoff on fault detection; 60-min response target</td></tr>
+            <tr><td><strong>PSPS</strong> — Public Safety Power Shutoff</td><td>Extreme, widespread fire weather event; Red Flag Warning + severe wind forecast</td><td>Targeted circuits in highest-risk areas</td><td>Planned, pre-notified shutoff; multi-day in extreme events</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <p style="margin-top:1rem;">PG&E's EPSS program prevented 2,015 wildfire hazards from causing ignitions between 2022–2025, and contributed to a <strong>95% reduction in fires greater than 10 acres</strong> from EPSS-related ignitions in 2025.</p>
+
+      <h3 style="margin-top:2rem;">Post-Event Review Requirements</h3>
+      <p>Every FWOP activation must be followed by a structured after-action review within 72 hours of deactivation:</p>
+      <ul style="list-style:disc;padding-left:1.5rem;color:var(--ftd-slate);font-size:0.9rem;line-height:2;">
+        <li>Assets inspected and actions taken during activation period</li>
+        <li>Defects identified or escalated — were they caught before an incident?</li>
+        <li>Response gaps — time from DWRI threshold to crew deployment</li>
+        <li>Model accuracy — did the DWRI match actual conditions on the ground?</li>
+        <li>Update scoring thresholds and FWOP activation criteria based on findings</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 8 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch8">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 08</div>
+    <h2>Developing Your Wildfire Mitigation Plan</h2>
+    <p>A practical 10-month blueprint for utilities and service providers to research, draft, file, and implement a WMP that satisfies regulatory requirements and drives real risk reduction.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+
+      <p class="lead">Developing a WMP is a 10-month process requiring input from hundreds of stakeholders across operations, engineering, IT, legal, and community relations. For utilities new to the process, this chapter provides a structured roadmap. For service providers, it defines the deliverables you need to produce to support your utility clients' WMP filings.</p>
+
+      <div class="timeline">
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Months 1–2</div>
+          <div class="timeline-title">Wildfire Risk Assessment</div>
+          <div class="timeline-body">Identify service territory risk zones, compile historical ignition data, develop HFTD / HFRA mapping, and establish FPI or equivalent fire potential model. Engage SMEs across vegetation, engineering, and operations.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Months 2–4</div>
+          <div class="timeline-title">Mitigation Strategy Development</div>
+          <div class="timeline-body">Identify mitigations for each risk category (inspection, VM, hardening, EPSS/PSPS, situational awareness). Evaluate feasibility, cost, and risk reduction value for each initiative. Establish maturity model baseline.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Months 4–7</div>
+          <div class="timeline-title">Plan Drafting & KPI Development</div>
+          <div class="timeline-body">Draft WMP narrative by section. Define quantitative commitments (circuit miles inspected, VM acres completed, hardening targets). Develop QDR data structure. Coordinate regulatory review prep.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Month 7–8</div>
+          <div class="timeline-title">Stakeholder Review & Community Engagement</div>
+          <div class="timeline-body">Brief county emergency managers, fire agencies, tribal governments, and community leaders. Incorporate feedback into plan. Conduct pre-filing regulatory consultation with Cal OEIS / OPUC / WUTC.</div>
+        </div>
+        <div class="timeline-item">
+          <div class="timeline-dot"></div>
+          <div class="timeline-date">Month 8–10</div>
+          <div class="timeline-title">Filing, Review, and Implementation Launch</div>
+          <div class="timeline-body">Submit WMP with all required data tables, financial documentation, and GIS attachments. Respond to agency data requests. Launch implementation programs. Begin QDR tracking cycle.</div>
+        </div>
+      </div>
+
+      <h3 style="margin-top:2rem;">Maturity Model Framework</h3>
+      <p>California's Office of Energy Infrastructure Safety (Cal OEIS) uses a Wildfire Mitigation Maturity Model to assess the relative sophistication of a utility's program. The International Wildfire Risk Mitigation Consortium (IWRMC) has developed a parallel model adopted by utilities globally. New utilities should use these models to establish a baseline and build a continuous improvement roadmap.</p>
+
+      <div class="cards-3">
+        <div class="card accent-border">
+          <h4>Level 1 – Reactive</h4>
+          <p>Compliance-driven inspections only. No risk scoring. Incident response, not prevention. Common in utilities new to WMP obligations.</p>
+        </div>
+        <div class="card accent-border blue">
+          <h4>Level 2 – Structured</h4>
+          <p>Systematic inspection programs. Basic WRS scoring. Annual VM planning. EPSS/PSPS protocols defined. First WMP filing submitted.</p>
+        </div>
+        <div class="card accent-border green">
+          <h4>Level 3 – Predictive</h4>
+          <p>Dynamic risk scoring (WRS + DWRI + TRS). Drone/LiDAR programs operational. AI-assisted defect detection. Real-time situational awareness. FWOP fully deployed.</p>
+        </div>
+      </div>
+
+      <div class="callout" style="margin-top:1rem;">
+        <div class="callout-label">External Resources</div>
+        <h4>Where to Find WMP Templates and Databases</h4>
+        <p><strong>PNNL Wildfire Mitigation Plans Database</strong> — wildfire.pnnl.gov — tracks 175+ organizations across 19 states and provinces. Excellent reference for understanding how peer utilities structure their plans and how strategies evolve across filing cycles. <strong>NARUC Wildfire Workbook for Utility Regulators</strong> — free resource covering policy, content requirements, and regulatory best practices for WMP development.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 9 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch9">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 09</div>
+    <h2>Technology & Data Infrastructure</h2>
+    <p>The platforms, sensors, AI tools, and data integration architectures that power a modern wildfire mitigation program — from the field to the boardroom.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <p class="lead">Over the past decade, the most advanced utilities have transformed from reactive event-responders into data-driven, predictive risk management organizations. The technology infrastructure enabling this transformation falls into four domains: sensing, modeling, operations, and data integration.</p>
+
+      <h3>Technology Stack Overview</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Domain</th><th>Technology</th><th>Wildfire Application</th><th>Providers</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Sensing</strong></td><td>AI cameras, weather stations, soil sensors</td><td>Real-time ignition detection, weather monitoring, fuel moisture</td><td>PanoCam, ALERTWest, WWG, GridWare</td></tr>
+            <tr><td><strong>Aerial Intelligence</strong></td><td>Drone/LiDAR, helicopter, satellite</td><td>Asset inspection, vegetation mapping, situational awareness</td><td>Cyberhawk, Planet Labs, SharperShape</td></tr>
+            <tr><td><strong>Fire Behavior Modeling</strong></td><td>FPI, CFB simulation, spread modeling</td><td>Fire potential forecasting, consequence modeling, PSPS decisions</td><td>Technosylva, Forsite, XyloPlan</td></tr>
+            <tr><td><strong>Data Platform</strong></td><td>Cloud GIS, asset management, inspection platforms</td><td>Work packaging, QDR reporting, regulatory data delivery</td><td>Esri, Sherlock (PG&amp;E), iHawk (Cyberhawk), AWS</td></tr>
+            <tr><td><strong>AI/ML Analytics</strong></td><td>Defect detection, risk scoring, predictive failure</td><td>Automated defect classification, vegetation strike prediction</td><td>AiDASH, Overstory, AWS Perception AI</td></tr>
+            <tr><td><strong>Operational Comms</strong></td><td>PSPS platforms, notification systems</td><td>Customer notifications, agency coordination, FWOP communications</td><td>Everbridge, SmartComms (PG&amp;E)</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2.5rem;">Fire Potential Index (FPI)</h3>
+      <p>PG&E's FPI model — currently at version 5.5 — uses machine learning to evaluate catastrophic fire probability across 400,000 sub-kilometer grid cells, outputting a risk level from R1 (low) to R5 (extreme). Key FPI thresholds for operational decisions:</p>
+
+      <div class="score-band">
+        <div class="score-item score-low"><div class="score-range">R1–R2</div><div class="score-label">Low/Moderate</div><div class="score-action">Standard operations</div></div>
+        <div class="score-item score-mod"><div class="score-range">R3</div><div class="score-label">Elevated</div><div class="score-action">EPSS minimum trigger</div></div>
+        <div class="score-item score-high"><div class="score-range">R4</div><div class="score-label">High</div><div class="score-action">EPSS enabled; peak criteria</div></div>
+        <div class="score-item score-crit"><div class="score-range">R5</div><div class="score-label">Extreme</div><div class="score-action">Full EPSS; PSPS evaluation</div></div>
+      </div>
+
+      <p style="font-size:0.85rem;color:var(--ftd-muted);">R3+ conditions historically account for 97% of acres burned and 100% of property damage in PG&E's service area.</p>
+
+      <h3 style="margin-top:2rem;">Recommended Technology Integration for Service Providers</h3>
+      <div class="checklist">
+        <li>GPS-tagged inspection data with asset-level ID linkage to utility GIS</li>
+        <li>Structured defect classification aligned to utility Priority 1/2/3 coding</li>
+        <li>Photo evidence with metadata (date/time, GPS, inspector ID, aircraft ID)</li>
+        <li>LiDAR deliverables in LAZ/LAS format with coordinate system documented</li>
+        <li>Inspection reports in utility-compatible format (CSV/GDB/Shapefile as specified)</li>
+        <li>Chain-of-custody documentation for regulatory audit trail</li>
+        <li>QAQC review prior to delivery — no unvalidated data delivered to client</li>
+        <li>Cloud storage with access controls aligned to utility data governance requirements</li>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- CHAPTER 10 -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="ch10">
+  <div class="chapter-hero">
+    <div class="chapter-num">Chapter 10</div>
+    <h2>Stakeholder Communications</h2>
+    <p>Building trust through transparency — how utilities and service providers communicate wildfire risk, outage impacts, and safety programs to regulators, communities, and customers.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+
+      <p class="lead">Effective wildfire communication is not about managing perception — it's about earning trust through consistent, transparent, year-round engagement. Utilities and service providers that communicate proactively build the goodwill needed when difficult decisions (like PSPS events) must be made quickly.</p>
+
+      <h3>Stakeholder Engagement Matrix</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Stakeholder Group</th><th>Communication Goal</th><th>Key Channels</th><th>Frequency</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>Regulators (Cal OEIS / CPUC)</strong></td><td>WMP compliance; QDR reporting; performance metrics</td><td>Official filings, data portals, regulatory meetings</td><td>Quarterly + Annual</td></tr>
+            <tr><td><strong>County Emergency Managers</strong></td><td>PSPS coordination; ingress/egress; joint response planning</td><td>Annual contingency plan meetings; direct calls during events</td><td>Annual + Event-triggered</td></tr>
+            <tr><td><strong>CAL FIRE / Local Fire Agencies</strong></td><td>Preseason briefings; fast-trip settings coordination; ICS alignment</td><td>Agency rep program; tabletop exercises; seasonal outlooks</td><td>Annual preseason + Ongoing</td></tr>
+            <tr><td><strong>Tribal Governments</strong></td><td>Unique fire safety needs; service continuity; cultural resource protection</td><td>Direct outreach; co-design of communications; WMP community input</td><td>Year-round</td></tr>
+            <tr><td><strong>Customers (HFTD/HFRA)</strong></td><td>Outage preparation; AFN support; backup power resources</td><td>Direct mail, email, text, social media, community events</td><td>Seasonal + Event-triggered</td></tr>
+            <tr><td><strong>Media</strong></td><td>Accurate public information; amplify safety preparedness</td><td>Press releases, media briefings, spokesperson protocols</td><td>Ongoing</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <div class="callout blue" style="margin-top:1.5rem;">
+        <div class="callout-label">Best Practice</div>
+        <h4>PG&E's First Responder Workshop Program</h4>
+        <p>Since 2012, PG&E's Public Safety Specialist program has delivered utility safety education to over 87,000 public safety members — covering gas and electrical emergency response. This program has become one of the most sought-after curricula in the first responder community and is a model for how utilities can build deep, trust-based relationships with public safety agencies before incidents occur.</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- APPENDIX A -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="appendix-a">
+  <div class="chapter-hero" style="background:#1e293b;">
+    <div class="chapter-num">Appendix A</div>
+    <h2>Risk Scoring Quick Reference</h2>
+    <p>Complete scoring tables for WRS categories and DWRI factors for rapid field use.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:white;">
+    <div class="container">
+
+      <h3>WRS Scoring — All Five Categories</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Score</th><th>Structural Integrity</th><th>Clearance Compliance</th><th>Vegetation Risk</th><th>Environmental Exposure</th><th>Asset Condition</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>0</strong></td><td>Plumb; no damage</td><td>All clearances compliant</td><td>No veg within 10 ft</td><td>Flat; low wind; low fuel</td><td>New/excellent condition</td></tr>
+            <tr><td><strong>1</strong></td><td>Minor weathering; no structural impact</td><td>Tight but compliant</td><td>Veg 5–10 ft; no risk</td><td>Mild exposure</td><td>Minor cosmetic wear</td></tr>
+            <tr><td><strong>2</strong></td><td>Lean 2–5°; early shell rot</td><td>Spacing appears to encroach 1–2 ft of minimum</td><td>Veg 3–5 ft; seasonal risk</td><td>Moderate wind or seasonal dryness</td><td>Moderate wear; aging hardware</td></tr>
+            <tr><td><strong>3</strong></td><td>Lean 5–10°; visible rot; moderate cracking</td><td>Probable violation; sag risk — Eng. Review</td><td>Veg 1–3 ft; overhang — P2</td><td>Known wind corridor or slope</td><td>Degraded; broken lashing; loose hardware — P2</td></tr>
+            <tr><td><strong>4</strong></td><td>Lean 10–15°; groundline suspected; anchor instability — Eng. Required</td><td>Confirmed deficiency — P2</td><td>Contacting comm cable; strike distance — P2/P1</td><td>High fire-prone area; heavy fuels; WUI</td><td>Severe deterioration; abandoned attachments — P2/P1</td></tr>
+            <tr><td><strong>5</strong></td><td>Lean &gt;15°; confirmed groundline failure — P1 Immediate</td><td>Conductor contact or imminent — P1</td><td>Contacting energized conductor + dry conditions — P1</td><td>Extreme fire history; steep; high wind funnel</td><td>Failed condition; hanging cable; detached equipment — P1</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2rem;">DWRI Scoring — Environmental Factors</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Score</th><th>Wind Speed</th><th>Temperature</th><th>Relative Humidity</th><th>Fuel Moisture</th><th>Fire Weather Alerts</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><strong>0</strong></td><td>&lt;10 mph</td><td>&lt;75°F</td><td>&gt;50%</td><td>&gt;20%</td><td>None</td></tr>
+            <tr><td><strong>1</strong></td><td>10–15 mph</td><td>75–85°F</td><td>40–50%</td><td>15–20%</td><td>No active alert</td></tr>
+            <tr><td><strong>2</strong></td><td>15–25 mph</td><td>85–95°F</td><td>25–40%</td><td>12–15%</td><td>Fire Weather Watch</td></tr>
+            <tr><td><strong>3</strong></td><td>25–35 mph</td><td>95–105°F</td><td>15–25%</td><td>9–12%</td><td>Red Flag Warning issued</td></tr>
+            <tr><td><strong>4</strong></td><td>35–50 mph</td><td>105–115°F</td><td>10–15%</td><td>6–9%</td><td>Red Flag + Advisory</td></tr>
+            <tr><td><strong>5</strong></td><td>&gt;50 mph gusts</td><td>&gt;115°F</td><td>&lt;10%</td><td>&lt;6%</td><td>Active RFW + Extreme conditions</td></tr>
+          </tbody>
+        </table>
+      </div>
+
+      <h3 style="margin-top:2rem;">TRS Work Prioritization Reference</h3>
+      <div class="table-wrap">
+        <table>
+          <thead>
+            <tr><th>Priority</th><th>TRS Range</th><th>Field Action</th><th>Engineering</th><th>Timeline</th></tr>
+          </thead>
+          <tbody>
+            <tr><td><span class="tag tag-p1">Critical</span></td><td>&gt;100</td><td>Fire-Day Protocol; rapid response; emergency stabilization</td><td>Immediate evaluation; de-energization if applicable</td><td>Same-day</td></tr>
+            <tr><td><span class="tag tag-p1">Severe</span></td><td>81–100</td><td>Immediate prioritization; urgent work queue; pre-stage crews</td><td>Required — reinforcement or replacement</td><td>1–3 days</td></tr>
+            <tr><td><span class="tag tag-p2">High</span></td><td>61–80</td><td>Expedited correction; active work package; increased inspection freq.</td><td>Required — pole loading or MRE</td><td>&lt;2 weeks</td></tr>
+            <tr><td><span class="tag tag-p2">Elevated</span></td><td>41–60</td><td>Near-term maintenance; engineering screening</td><td>Screening required</td><td>&lt;60 days</td></tr>
+            <tr><td><span class="tag tag-p3">Moderate</span></td><td>21–40</td><td>Plan maintenance; routine VM; monitor progression</td><td>Not required unless worsening</td><td>Next cycle</td></tr>
+            <tr><td><span class="tag tag-p3">Low</span></td><td>0–20</td><td>Routine monitoring; standard inspection cycle</td><td>Not required</td><td>Standard cycle</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- APPENDIX B -->
+<!-- ══════════════════════════════════════════════ -->
+<div id="appendix-b">
+  <div class="chapter-hero" style="background:#1e293b;">
+    <div class="chapter-num">Appendix B</div>
+    <h2>Program Readiness Checklist</h2>
+    <p>A practical self-assessment tool for utilities and service providers evaluating their wildfire mitigation program maturity.</p>
+    <div class="chapter-deco"></div>
+  </div>
+  <div class="chapter-divider"></div>
+  <div class="section-pad" style="background:var(--ftd-light);">
+    <div class="container">
+
+      <div class="cards-2">
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Regulatory & Planning</h4>
+          <ul class="checklist">
+            <li>WMP filed with applicable state regulator (Cal OEIS / OPUC / WUTC)</li>
+            <li>HFTD / HFRA map current and internally validated</li>
+            <li>QDR data structure established and reporting cadence confirmed</li>
+            <li>GO 95 and GO 165 compliance documentation current</li>
+            <li>WMP maturity model baseline completed</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Inspection Operations</h4>
+          <ul class="checklist">
+            <li>Drone inspection program staffed with FAA Part 107 certified pilots</li>
+            <li>LiDAR baseline completed for all HFTD distribution circuits</li>
+            <li>Defect classification system aligned to Priority 1/2/3 and WRS scoring</li>
+            <li>Photo evidence standards documented and QAQC enforced</li>
+            <li>Engineering review triggers and escalation paths documented</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Vegetation Management</h4>
+          <ul class="checklist">
+            <li>Annual VM work plan scoped using GIS risk prioritization</li>
+            <li>Hazard tree program active with TRAQ-certified arborist oversight</li>
+            <li>Clearance standards documented for HFTD and non-HFTD zones</li>
+            <li>One VM database or equivalent multi-year data system operational</li>
+            <li>Remote sensing (satellite/drone) integrated into VM inspection planning</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Fire Weather Operations</h4>
+          <ul class="checklist">
+            <li>FWOP activation criteria documented with DWRI thresholds</li>
+            <li>EPSS / PSPS protocols defined with clear enablement criteria</li>
+            <li>60-minute outage response target established for HFRA circuits</li>
+            <li>Pre-staged crew deployment plan for Level 2 and 3 FWOP</li>
+            <li>Post-event review template and process in place</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Technology & Data</h4>
+          <ul class="checklist">
+            <li>FPI or equivalent fire potential model integrated into operations</li>
+            <li>AI-enabled inspection platform with defect detection operational</li>
+            <li>Real-time weather station network deployed in HFTD areas</li>
+            <li>GIS-based risk dashboard accessible to field, engineering, and leadership</li>
+            <li>All inspection data in audit-ready, regulatory-compatible format</li>
+          </ul>
+        </div>
+        <div>
+          <h4 style="margin-bottom:1rem;color:var(--ftd-orange);">Stakeholder Engagement</h4>
+          <ul class="checklist">
+            <li>Annual agency coordination meetings with all county emergency managers</li>
+            <li>CAL FIRE / ODF / DNR preseason coordination completed</li>
+            <li>AFN customer identification and outreach program active</li>
+            <li>Community wildfire safety resources published and updated annually</li>
+            <li>Internal WMP training completed for field, engineering, and operations teams</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════════ -->
+<!-- FOOTER -->
+<!-- ══════════════════════════════════════════════ -->
+<div class="chapter-divider"></div>
+<footer>
+  <div style="font-size:1.5rem;font-weight:900;color:#F97316;font-family:'Playfair Display',serif;margin-bottom:0.5rem;">FTD Launch</div>
+  <p style="margin-bottom:0.5rem;"><strong>West Coast Wildfire Mitigation Guide</strong> · 2026 Edition</p>
+  <p>Prepared to support utilities and service providers across California, Oregon, and Washington in building world-class wildfire mitigation programs.</p>
+  <p style="margin-top:1rem;font-size:0.75rem;">Sources include PG&amp;E 2026 Wildfire Mitigation Book, USDA Forest Service Pacific Northwest Fire Summaries (2024–2025), CPUC Wildfire resources, PNNL Wildfire Mitigation Plans Database, WECC 2024 Wildfire Summary, and industry partner technologies. This document is for informational and educational purposes.</p>
+</footer>
+
+<!-- BACK TO TOP -->
+<button class="back-to-top" onclick="document.getElementById('top').scrollIntoView({behavior:'smooth'})" aria-label="Back to top">↑</button>
+
+<script>
+  function toggleNav() {
+    const nav = document.getElementById('sidebarNav');
+    const overlay = document.getElementById('overlay');
+    nav.classList.toggle('open');
+    overlay.classList.toggle('show');
+  }
+
+  // Active nav link highlighting
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.sidebar-nav a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(section => {
+      const top = section.getBoundingClientRect().top;
+      if (top <= 100) current = section.id;
+    });
+    navLinks.forEach(link => {
+      link.classList.remove('active');
+      if (link.getAttribute('href') === '#' + current) link.classList.add('active');
+    });
+  });
+</script>
+</body>
+</html>
